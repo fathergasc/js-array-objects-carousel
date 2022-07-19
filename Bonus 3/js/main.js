@@ -111,6 +111,22 @@ for (let i = 0; i < thumbnailsList.length; i++) {
     )
 }
 
+const playDom = document.getElementById('play');
+const pauseDom = document.getElementById('pause');
+const reverseDom = document.getElementById('reverse');
+
+playDom.addEventListener('click',
+    function () {
+        autoPlay = setInterval(autoPlayF, 3000);
+    }
+)
+
+pauseDom.addEventListener('click',
+    function () {
+        clearInterval(autoPlay);
+    }
+)
+
 // functions
 
 function autoPlayF () {
