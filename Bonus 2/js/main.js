@@ -95,6 +95,22 @@ previousDom.addEventListener('click',
     }
 )
 
+const thumbnailsList = document.getElementsByClassName('img-wrap'); // returns a list of elements as an array, you can use .addEventListener directly on the array, you have to cycle through the array to add event listeners
+
+for (let i = 0; i < thumbnailsList.length; i++) {
+    thumbnailsList[i].addEventListener('click',
+        function () {
+            imagesList[activeImage].classList.remove('show');
+            thumbnailOverlayList[activeImage].classList.remove('remove-overlay');
+            activeImage = i;   //clicking on the next and prev buttons adds or subtracts from the activeImage value, but,clicking on the thumbnails, it can't change linearly and I have to assign i to activeImage index 
+            imagesList[activeImage].classList.add('show');
+            thumbnailOverlayList[activeImage].classList.add('remove-overlay');
+            clearInterval(autoPlay);
+            autoPlay = setInterval(autoPlayF, 3000);
+        }
+    )
+}
+
 // functions
 
 function autoPlayF () {
