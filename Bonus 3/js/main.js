@@ -58,6 +58,7 @@ thumbnailOverlayList[activeImage].classList.add('remove-overlay');
 
 let autoPlay = setInterval(autoPlayF, 3000);
 
+
 const nextDom = document.getElementById('next');
 const previousDom = document.getElementById('previous');
 
@@ -111,12 +112,16 @@ for (let i = 0; i < thumbnailsList.length; i++) {
     )
 }
 
+// bonus 3 starts here
+
 const playDom = document.getElementById('play');
 const pauseDom = document.getElementById('pause');
 const reverseDom = document.getElementById('reverse');
-
+let autoPlayDirection = true;
+console.log('autoPlayDirection: ', autoPlayDirection);
 playDom.addEventListener('click',
     function () {
+        clearInterval(autoPlay);
         autoPlay = setInterval(autoPlayF, 3000);
     }
 )
@@ -127,9 +132,26 @@ pauseDom.addEventListener('click',
     }
 )
 
+reverseDom.addEventListener('click',
+    function () {
+        if (autoPlayDirection == true) {
+            autoPlayDirection = false;
+            clearInterval(autoPlay);
+            autoPlay = setInterval(autoPlayF, 3000);
+        } else {
+            autoPlayDirection = true;
+            clearInterval(autoPlay);
+            autoPlay = setInterval(autoPlayF, 3000);
+        }
+    }
+)
+
+// bonus 3 ends here
+
 // functions
 
 function autoPlayF () {
+    if (autoPlayDirection == true) {
     imagesList[activeImage].classList.remove('show');
         thumbnailOverlayList[activeImage].classList.remove('remove-overlay');
         
@@ -140,4 +162,17 @@ function autoPlayF () {
         }
         imagesList[activeImage].classList.add('show');
         thumbnailOverlayList[activeImage].classList.add('remove-overlay'); 
+    } else {
+        imagesList[activeImage].classList.remove('show');
+        thumbnailOverlayList[activeImage].classList.remove('remove-overlay');
+
+        if (activeImage == 0) {
+            activeImage = imagesList.length - 1;
+        } else {
+            activeImage--;
+        }
+        imagesList[activeImage].classList.add('show');
+        thumbnailOverlayList[activeImage].classList.add('remove-overlay');
     }
+};
+
