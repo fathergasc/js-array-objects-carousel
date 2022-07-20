@@ -29,6 +29,7 @@ const images =
     },
 ];
 let activeImage = 0;
+const timer = 3000;
 
 const sliderDom = document.querySelector('.slider');
 const thumbnailsDom = document.querySelector('.thumbnails')
@@ -76,7 +77,7 @@ nextDom.addEventListener('click',
         }
         imagesList[activeImage].classList.add('show');
         thumbnailOverlayList[activeImage].classList.add('remove-overlay');
-        resetTimer();
+        resetTimer(timer);
     }
 )
 
@@ -92,7 +93,7 @@ previousDom.addEventListener('click',
         }
         imagesList[activeImage].classList.add('show');
         thumbnailOverlayList[activeImage].classList.add('remove-overlay');
-        resetTimer();
+        resetTimer(timer);
     }
 )
 
@@ -106,7 +107,7 @@ for (let i = 0; i < thumbnailsList.length; i++) {
             activeImage = i;   //clicking on the next and prev buttons adds or subtracts from the activeImage value, but,clicking on the thumbnails, it can't change linearly and I have to assign i to activeImage index 
             imagesList[activeImage].classList.add('show');
             thumbnailOverlayList[activeImage].classList.add('remove-overlay');
-            resetTimer();
+            resetTimer(timer);
         }
     )
 }
@@ -121,7 +122,7 @@ console.log('autoPlayDirection: ', autoPlayDirection);
 
 playDom.addEventListener('click',
     function () {
-        resetTimer();
+        resetTimer(timer);
     }
 )
 
@@ -135,10 +136,10 @@ reverseDom.addEventListener('click',
     function () {
         if (autoPlayDirection == true) {
             autoPlayDirection = false;
-            resetTimer();
+            resetTimer(timer);
         } else {
             autoPlayDirection = true;
-            resetTimer();
+            resetTimer(timer);
         }
     }
 )
@@ -176,8 +177,8 @@ function autoPlayF () {
 };
 
 //resets the timer to 0 and re-initializes it
-function resetTimer () {
+function resetTimer (intervalTimer) {
     clearInterval(autoPlay);
-    autoPlay = setInterval(autoPlayF, 3000);
+    autoPlay = setInterval(autoPlayF, intervalTimer);
 }
 
