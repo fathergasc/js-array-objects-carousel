@@ -56,6 +56,8 @@ imagesList[activeImage].classList.add('show');
 const thumbnailOverlayList = document.querySelectorAll('.thumbnail-overlay');
 thumbnailOverlayList[activeImage].classList.add('remove-overlay');
 
+
+// initialize autoplay on load of the page
 let autoPlay = setInterval(autoPlayF, 3000);
 
 
@@ -96,7 +98,7 @@ previousDom.addEventListener('click',
     }
 )
 
-const thumbnailsList = document.getElementsByClassName('img-wrap'); // returns a list of elements as an array, you can use .addEventListener directly on the array, you have to cycle through the array to add event listeners
+const thumbnailsList = document.getElementsByClassName('img-wrap'); // returns a list of elements as an array, you can't use .addEventListener directly on the array, you have to cycle through the array to add event listeners
 
 for (let i = 0; i < thumbnailsList.length; i++) {
     thumbnailsList[i].addEventListener('click',
@@ -119,6 +121,7 @@ const pauseDom = document.getElementById('pause');
 const reverseDom = document.getElementById('reverse');
 let autoPlayDirection = true;
 console.log('autoPlayDirection: ', autoPlayDirection);
+
 playDom.addEventListener('click',
     function () {
         clearInterval(autoPlay);
@@ -150,6 +153,8 @@ reverseDom.addEventListener('click',
 
 // functions
 
+
+// autoplay function, forward or backward base on the autoPlayDirection variable
 function autoPlayF () {
     if (autoPlayDirection == true) {
     imagesList[activeImage].classList.remove('show');
