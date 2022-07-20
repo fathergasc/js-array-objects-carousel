@@ -76,8 +76,7 @@ nextDom.addEventListener('click',
         }
         imagesList[activeImage].classList.add('show');
         thumbnailOverlayList[activeImage].classList.add('remove-overlay');
-        clearInterval(autoPlay);
-        autoPlay = setInterval(autoPlayF, 3000);
+        resetTimer();
     }
 )
 
@@ -93,8 +92,7 @@ previousDom.addEventListener('click',
         }
         imagesList[activeImage].classList.add('show');
         thumbnailOverlayList[activeImage].classList.add('remove-overlay');
-        clearInterval(autoPlay);
-        autoPlay = setInterval(autoPlayF, 3000);
+        resetTimer();
     }
 )
 
@@ -108,8 +106,7 @@ for (let i = 0; i < thumbnailsList.length; i++) {
             activeImage = i;   //clicking on the next and prev buttons adds or subtracts from the activeImage value, but,clicking on the thumbnails, it can't change linearly and I have to assign i to activeImage index 
             imagesList[activeImage].classList.add('show');
             thumbnailOverlayList[activeImage].classList.add('remove-overlay');
-            clearInterval(autoPlay);
-            autoPlay = setInterval(autoPlayF, 3000);
+            resetTimer();
         }
     )
 }
@@ -124,8 +121,7 @@ console.log('autoPlayDirection: ', autoPlayDirection);
 
 playDom.addEventListener('click',
     function () {
-        clearInterval(autoPlay);
-        autoPlay = setInterval(autoPlayF, 3000);
+        resetTimer();
     }
 )
 
@@ -139,12 +135,10 @@ reverseDom.addEventListener('click',
     function () {
         if (autoPlayDirection == true) {
             autoPlayDirection = false;
-            clearInterval(autoPlay);
-            autoPlay = setInterval(autoPlayF, 3000);
+            resetTimer();
         } else {
             autoPlayDirection = true;
-            clearInterval(autoPlay);
-            autoPlay = setInterval(autoPlayF, 3000);
+            resetTimer();
         }
     }
 )
@@ -180,4 +174,10 @@ function autoPlayF () {
         thumbnailOverlayList[activeImage].classList.add('remove-overlay');
     }
 };
+
+//resets the timer to 0 and re-initializes it
+function resetTimer () {
+    clearInterval(autoPlay);
+    autoPlay = setInterval(autoPlayF, 3000);
+}
 
